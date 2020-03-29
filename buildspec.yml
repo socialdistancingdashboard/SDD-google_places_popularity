@@ -23,6 +23,7 @@ phases:
       - echo BEGIN BUILD PHASE
       - python scraper.py
       - python scraper_shops_sights.py
+      - scraper_supermarkets.py
       -
     finally:
       - echo END BUILD PHASE
