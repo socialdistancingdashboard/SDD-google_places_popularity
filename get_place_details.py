@@ -2,15 +2,16 @@ import pandas as pd
 import requests
 import json
 from tqdm import tqdm
+import settings
 
-with open("place_ids/de_cities_unique_ags_ids.csv") as f:
+with open("place_ids/gmap_supermarket_ids.csv") as f:
      place_ids = [key.strip() for key in f.readlines()]
 
 data = pd.DataFrame()
 for id in tqdm(place_ids):
     #print(id)
     params = {
-        "key": "",
+        "key": settings.API_KEY,
         "place_id": id,
         "fields": ",".join(["place_id","address_component","name"])
     }
@@ -28,6 +29,8 @@ data["name"] = data["name"].str.lower()
 for store in ["Edeka" , "Rewe" , "Lidl" , "Aldi"]:
     print(store)
     print(data.loc[data["name"].str.contains(store.lower())]["city"].unique().shape)
+data
+data = data.drop_duplicates("place_id")
 
 result = []
 for city, group in data.groupby("city"):
@@ -41,12 +44,14 @@ for city, group in data.groupby("city"):
             list.append(group.loc[~group["place_id"].isin(list)]["place_id"].iloc[0])
         except Exception as e:
             print(e)
-            print("no more for" + city)
+            print("no more for " + city)
     if not list:
         raise Exception('{} has not enough results'.format(city))
+    if city in ["Düsseldorf","Essen","Köln","Dortmund","Bonn","Duisburg","Bochum","Gelsenkirchen","Berlin","München","Stuttgart"]:
+        list = group["place_id"].tolist()
     result = result + list
 len(result)
 pd.DataFrame(result).to_csv("place_ids/gmap_supermarket_ids.csv", index=False, header=False)
 data["city"].value_counts().hist()
-data.loc[data["place_id"].isin(result)]["city"].unique().shape
-data["city"].unique().shape
+data.loc[data["place_id"].isin(result)]["city"].value_counts().hist()
+data["city"]
