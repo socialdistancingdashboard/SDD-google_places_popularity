@@ -47,7 +47,7 @@ for city, group in data.groupby("city"):
             print("no more for " + city)
     if not list:
         raise Exception('{} has not enough results'.format(city))
-    if city in ["Düsseldorf","Essen","Köln","Dortmund","Bonn","Duisburg","Bochum","Gelsenkirchen","Berlin","München","Stuttgart"]:
+    if city in ["Hannover","Hamburg","Düsseldorf","Essen","Köln","Dortmund","Bonn","Duisburg","Bochum","Gelsenkirchen","Berlin","München","Stuttgart"]:
         list = group["place_id"].tolist()
     result = result + list
 len(result)
