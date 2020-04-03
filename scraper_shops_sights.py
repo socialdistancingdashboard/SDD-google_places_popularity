@@ -13,7 +13,7 @@ api_key = settings.API_KEY
 s3_client = boto3.client('s3')
 date = datetime.now()
 
-city_csv = pd.read_csv("place_ids/hops_sights_ids.csv", sep=";", header=None)
+city_csv = pd.read_csv("place_ids/shops_sights_ids.csv", sep=";", header=None)
 
 # place_ids = [id.strip() for id in city_csv.readlines()]
 
