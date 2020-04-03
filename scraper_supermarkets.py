@@ -12,9 +12,7 @@ api_key = settings.API_KEY
 s3_client = boto3.client('s3')
 date = datetime.now()
 
-response = s3_client.get_object(Bucket=settings.BUCKET, Key="codebuild-googleplaces/gmap_supermarket_ids.csv")
-
-city_csv = pd.read_csv(response["Body"], sep=";", header=None)
+city_csv = pd.read_csv("place_ids/gmap_supermarket_ids.csv", sep=";", header=None)
 
 # place_ids = [id.strip() for id in city_csv.readlines()]
 
@@ -35,5 +33,8 @@ for place_id in place_ids:
     else:
         print("No Popularity-Data for " + data["name"])
 
-s3_client.put_object(Body=json.dumps(result),  Bucket=settings.BUCKET,
-              Key='googleplaces_supermarket/{}/{}/{}/{}'.format(str(date.year).zfill(4), str(date.month).zfill(2), str(date.day).zfill(2), str(date.hour).zfill(2)))
+with open('{}/{}/{}/{}'.format(str(date.year).zfill(4), str(date.month).zfill(2), str(date.day).zfill(2), str(date.hour).zfill(2)), 'w') as f:
+    json.dump(result, f)
+
+# s3_client.put_object(Body=json.dumps(result),  Bucket=settings.BUCKET,
+#               Key='googleplaces_supermarket/{}/{}/{}/{}'.format(str(date.year).zfill(4), str(date.month).zfill(2), str(date.day).zfill(2), str(date.hour).zfill(2)))

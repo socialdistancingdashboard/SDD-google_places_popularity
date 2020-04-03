@@ -12,9 +12,7 @@ api_key = settings.API_KEY
 s3_client = boto3.client('s3')
 date = datetime.now()
 
-response = s3_client.get_object(Bucket=settings.BUCKET, Key="codebuild-googleplaces/2153_staedte_koordinaten.csv")
-
-city_csv = pd.read_csv(response["Body"], sep=";", header=None)
+city_csv = pd.read_csv("place_ids/transit.csv", sep=";", header=None)
 
 # place_ids = [id.strip() for id in city_csv.readlines()]
 
