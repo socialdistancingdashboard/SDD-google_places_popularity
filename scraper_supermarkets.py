@@ -33,8 +33,8 @@ for place_id in place_ids:
     else:
         print("No Popularity-Data for " + data["name"])
 
-# with open('{}-{}-{}-{}'.format(str(date.year).zfill(4), str(date.month).zfill(2), str(date.day).zfill(2), str(date.hour).zfill(2)), 'w') as f:
-#     json.dump(result, f)
+with open('{}-{}-{}-{}'.format(str(date.year).zfill(4), str(date.month).zfill(2), str(date.day).zfill(2), str(date.hour).zfill(2)), 'w') as f:
+    json.dump(result, f)
 
 s3_client.put_object(Body=json.dumps(result),  Bucket=settings.BUCKET,
               Key='googleplaces_supermarket/{}/{}/{}/{}'.format(str(date.year).zfill(4), str(date.month).zfill(2), str(date.day).zfill(2), str(date.hour).zfill(2)))
