@@ -10,7 +10,7 @@ phases:
 
     finally:
       - echo This always runs even if the update or install command fails
-      
+
   pre_build:
     commands:
       - echo BEGIN PRE_BUILD PHASE
@@ -22,7 +22,8 @@ phases:
     commands:
       - echo BEGIN BUILD PHASE
       - python scraper.py
-      -
+      #- python scraper_shops_sights.py
+      #- python scraper_supermarkets.py     
     finally:
       - echo END BUILD PHASE
 
