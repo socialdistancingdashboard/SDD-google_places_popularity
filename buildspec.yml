@@ -15,7 +15,7 @@ phases:
     commands:
       - echo BEGIN PRE_BUILD PHASE
       - pip install -r requirements.txt
-      - pip install --upgrade git+https://github.com/m-wrzr/populartimes
+      - pip install --upgrade git+https://github.com/GrocerCheck/LivePopularTimes
     finally:
       - echo END PRE_BUILD PHASE
 

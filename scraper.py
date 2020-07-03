@@ -1,6 +1,6 @@
 import boto3
 import json
-import populartimes
+import livepopulartimes
 from datetime import datetime
 import time
 import os
@@ -23,7 +23,7 @@ for place_id in place_ids:
     print("processing", place_id)
     try:
         key = api_key
-        data = populartimes.get_id(key, place_id)
+        data = livepopulartimes.get_populartimes_by_PlaceID(key, place_id)
     except Exception as e:
         print(e)
         print("Error with key: " + place_id)
